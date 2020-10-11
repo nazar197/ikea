@@ -1,5 +1,3 @@
-'use strict';
-
 const generateSubCatalog = () => {
   const subCatalogHTML = `
     <div class="subcatalog">

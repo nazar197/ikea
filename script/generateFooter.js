@@ -1,5 +1,3 @@
-'use strict';
-
 const generateFooter = () => {
   const footerHTML = `
     <footer>

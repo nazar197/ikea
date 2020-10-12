@@ -18,15 +18,14 @@ const cartList = [
 export const loadData = () => {
   if (location.search) {
     const search = decodeURI(location.search);
-    console.log(search);
     const prop = search.split('=')[0].substring(1);
     const value = search.split('=')[1];
 
     if (prop === 's') {
-      console.log(value);
+      getData.search(value, data => console.log(data));
     } else if (prop === 'wishlist') {
       getData.wishList(wishList, data => console.dir({wishList: data}));
-    } else {
+    } else if (prop === 'cat' || prop === 'subcat'){
       getData.category(prop, value, data => console.log(data));
     }
   }

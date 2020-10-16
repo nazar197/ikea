@@ -58,7 +58,7 @@ export const getData = {
       callback(result);
     });
   },
-  subcatalog(value, callback) {
+  subCatalog(value, callback) {
     this.get(data => {
       const result = data
         .reduce((arr, item) => {

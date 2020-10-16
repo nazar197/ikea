@@ -27,7 +27,7 @@ export const catalog = () => {
 
     const catalogItemList = event.target.closest('.catalog-list__item>a');
     if (catalogItemList) {
-      getData.subcatalog(catalogItemList.textContent, data => {
+      getData.subCatalog(catalogItemList.textContent, data => {
         updateSubCatalog(catalogItemList.textContent, data);
         subCatalog.classList.add('subopen');
       });

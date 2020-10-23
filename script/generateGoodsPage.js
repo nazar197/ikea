@@ -1,16 +1,17 @@
 import { getData } from './getData.js';
+import userData from './userData.js';
 
 const COUNTER = 6;
 
-const wishList = ['idd005', 'idd065', 'idd097', 'idd023'];
-
 const generateGoodsPage = () => {
-
   const mainHeader = document.querySelector('.main-header');
-  const goodsList = document.querySelector('.goods-list');
-
+  
   const generateCards = data => {
+
+    const goodsList = document.querySelector('.goods-list');
+
     goodsList.textContent = '';
+
     if (!data.length) {
       const goods = document.querySelector('.goods');
       goods.textContent = location.search === '?wishlist' ?
@@ -18,6 +19,7 @@ const generateGoodsPage = () => {
         'К сожалению по вашему запросу ничего не найдено';
       return;
     }
+
     data.forEach(item => {
       const {name: itemName, count, description, id, img: image, price} = item;
       goodsList.insertAdjacentHTML('afterbegin', `
@@ -29,7 +31,7 @@ const generateGoodsPage = () => {
                   src=${image[0]}
                   ${image[1] ? `data-second-image=${image[1]}` : ''}>
               </div>
-              ${count > COUNTER ? `<p class="goods-item__new">Новинка</p>` : ''}
+              ${count >= COUNTER ? `<p class="goods-item__new">Новинка</p>` : ''}
               ${!count ? `<p class="goods-item__new">Нет в наличиии</p>` : ''}
               <h3 class="goods-item__header">${itemName}</h3>
               <p class="goods-item__description">${description}</p>
@@ -47,6 +49,16 @@ const generateGoodsPage = () => {
         </li>
       `)
     });
+
+    goodsList.addEventListener('click', e => {
+      const btnAddCard = e.target.closest('.btn-add-card');
+      if (btnAddCard) {
+        e.preventDefault();
+        userData.cartList = btnAddCard.dataset.idd;
+        console.log(userData.cartList);
+      }
+    });
+
   }
 
 
@@ -59,7 +71,7 @@ const generateGoodsPage = () => {
       getData.search(value, generateCards);
       mainHeader.textContent = `Поиск: ${value}`;
     } else if (prop === 'wishlist') {
-      getData.wishList(wishList, generateCards);
+      getData.wishList(userData.wishList, generateCards);
       mainHeader.textContent = `Список желаний`;
     } else if (prop === 'cat' || prop === 'subcat'){
       getData.category(prop, value, generateCards);

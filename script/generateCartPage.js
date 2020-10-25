@@ -1,4 +1,5 @@
 import { getData } from './getData.js';
+import { sendCart } from './sendData.js';
 import userData from './userData.js';
 
 const generateCartPage = () => {
@@ -93,6 +94,7 @@ const generateCartPage = () => {
 
     getData.cart(userData.cartList, renderCartList);
 
+    sendCart();
   }
 }
 

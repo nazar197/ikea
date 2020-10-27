@@ -16,11 +16,6 @@ const sendData = async (url, data) => {
 export const sendCart = () => {
   const cartForm = document.querySelector('.cart-form');
 
-  const data = {
-    name: 'Плюшевый Мишка',
-    count: 3
-  };
-
   cartForm.addEventListener('submit', e => {
     e.preventDefault();
 
